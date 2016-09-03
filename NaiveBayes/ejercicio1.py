@@ -46,7 +46,6 @@ a = pd.DataFrame([np.log(norm.cdf(X_test[i],loc = spammean[i], scale = spamstd[i
 b = pd.DataFrame([np.log(norm.cdf(X_test[i],loc = nspammean[i], scale = nspamstd[i])) for i in X_test.columns]).sum()
 spam = a > b
 
-
 #Checar los resultados del algoritmo contra el algoritmo en sklearn
 model = nb()
 model.fit(X_train,Y_train)
