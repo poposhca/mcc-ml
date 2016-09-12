@@ -2,7 +2,6 @@
 """
 Created on Thu Aug 25 11:33:16 2016
 
-@author: poposhca
 """ 
 from __future__ import division                         #En python 2.7 para que las divisiones sean floats
 import math                                             #Math como en C#

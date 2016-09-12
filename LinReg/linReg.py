@@ -4,7 +4,7 @@ import matplotlib.pyplot as pt
 from sklearn import linear_model as lin
 from sklearn.cross_validation import train_test_split 
 
-flag = 3
+flag = 1
 
 if flag == 1:
     #Datos lineales
@@ -14,8 +14,21 @@ if flag == 1:
     #regresion linear
     reg = lin.LinearRegression()
     reg.fit(X_train, Y_train)
-    pt.plot(X_test, reg.predict(X_test), linewidth=3)
+    #pt.plot(X_test, reg.predict(X_test), linewidth=3)
+    #pt.show()
+    #error
+
+    print reg.coef_
+    w0 = reg.intercept_
+    w1 = np.linspace(-reg.coef_[0], reg.coef_[0]*3,100)
+    # p = reg.intercept_+reg.coef_[0]*X_test -- Lo que esta haciendo predict, regresa el punto y de la recta
+    def error (w0,w1):
+        y = w0 + w1 * X_test
+        e = y - Y_test
+        return e
+    pt.plot(w1,[np.mean(error(i,w0)) for i in w1], color = 'red')
     pt.show()
+
 
 elif flag == 2:
     #Datos no lineales
