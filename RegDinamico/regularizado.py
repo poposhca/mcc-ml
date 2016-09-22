@@ -13,7 +13,7 @@ def errorccMedio(ws, xs, ys):
         res += y - ys.iloc[i]
     return (res/xs.shape[0])**2
 
-df = pd.read_csv("/Users/icloud/OneDrive/MCC/ML/proyectos/RegDinamico/regLinPoli.csv")
+df = pd.read_csv("regLinPoli.csv")
 X_train, X_test, Y_train, Y_test = train_test_split(df[df.columns[0:-1]],df[df.columns[-1]], train_size=0.75)
 
 X_train = (X_train - X_train.mean()) / (X_train.max() - X_train.min())
@@ -35,6 +35,8 @@ for l in larr:
         ws[1:] = [(ws[j]) + (X_train.iloc[i].iloc[j-1] * t * eta) - (ws[j] * l) for j in range(1,len(ws))]
     err.append(errorccMedio(ws,X_train,Y_train))
 
-
 pt.plot(err)
+axes = pt.gca()
+axes.set_xlim([0,10])
+axes.set_ylim([0,2])
 pt.show()
