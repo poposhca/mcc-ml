@@ -12,7 +12,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(df[df.columns[0:-1]],df[df.c
 X_train = (X_train - X_train.mean()) / (X_train.max() - X_train.min())
 Y_train = (Y_train - Y_train.mean()) / (Y_train.max() - Y_train.min())
 #Constantes
-eta = 0.05
+eta = 0.1
 x0 = 1
 #Valor maximo del random
 rmax = 10
