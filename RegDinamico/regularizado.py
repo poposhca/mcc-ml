@@ -16,14 +16,14 @@ def errorccMedio(ws, xs, ys):
 df = pd.read_csv("regLinPoli.csv")
 X_train, X_test, Y_train, Y_test = train_test_split(df[df.columns[0:-1]],df[df.columns[-1]], train_size=0.75)
 
-X_train = (X_train - X_train.mean()) / (X_train.max() - X_train.min())
-Y_train = (Y_train - Y_train.mean()) / (Y_train.max() - Y_train.min())
+X_train = (X_train - X_train.mean()) / X_train.std()
+Y_train = (Y_train - Y_train.mean()) / Y_train.std()
 eta = 0.01
 x0 = 1
-rmax = 10
+rmax = 3
 
 #Nueva variable l, ahora vamos a iterar para distintos valores de l
-larr = np.arange(0,0.1,0.007)
+larr = np.arange(0,0.1,0.002)
 err = []
 
 for l in larr:
@@ -35,6 +35,7 @@ for l in larr:
         ws[1:] = [(ws[j]) + (X_train.iloc[i].iloc[j-1] * t * eta) - (ws[j] * l) for j in range(1,len(ws))]
     err.append(errorccMedio(ws,X_train,Y_train))
 
+print "Punto minimo: " + str(min(err))
 pt.plot(err)
 axes = pt.gca()
 axes.set_xlim([0,10])
