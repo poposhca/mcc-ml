@@ -23,17 +23,16 @@ larr = np.arange(0,0.1,0.005)
 ws = []
 
 #Correr varias veces para que esta cosa aprenda bien, pero no siempre funciona
-for k in range(50):
-    for l in larr:
-        ws = [random.randint(0,rmax) for i in range (0,X_train.shape[1] + 1)]
-        for i in range (0,X_train.shape[0]):
-            v = ws[0]*x0 + (ws[1:]*X_train.iloc[i]).sum()
-            if(v < 0): v = 0
-            else: v = 1
-            t = (Y_train.iloc[i] - v)
-            err.append(t)
-            ws[0] = (ws[0]) + x0 * t
-            ws[1:] = [(ws[j]) + (X_train.iloc[i].iloc[j-1] * t * eta) - (ws[j] * l) for j in range(1,len(ws))]
+for l in larr:
+    ws = [random.randint(0,rmax) for i in range (0,X_train.shape[1] + 1)]
+    for i in range (0,X_train.shape[0]):
+        v = ws[0]*x0 + (ws[1:]*X_train.iloc[i]).sum()
+        if(v < 0): v = 0
+        else: v = 1
+        t = (Y_train.iloc[i] - v)
+        err.append(t)
+        ws[0] = (ws[0]) + x0 * t
+        ws[1:] = [(ws[j]) + (X_train.iloc[i].iloc[j-1] * t * eta) - (ws[j] * l) for j in range(1,len(ws))]
 
 pt.plot([-(ws[0]/ws[2]),-(ws[0]+ws[1]*2)/ws[2]],[0,2])
 pt.scatter(X_train.x1,X_train.x2)
