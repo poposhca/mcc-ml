@@ -34,6 +34,7 @@ for l in larr:
         ws[0] = (ws[0]) + x0 * t
         ws[1:] = [(ws[j]) + (X_train.iloc[i].iloc[j-1] * t * eta) - (ws[j] * l) for j in range(1,len(ws))]
 
-pt.plot([-(ws[0]/ws[2]),-(ws[0]+ws[1]*2)/ws[2]],[0,2])
+pt.plot([0,2],[(ws[0]/ws[2]),(ws[0]+ws[1]*2)/ws[2]])
 pt.scatter(X_train.x1,X_train.x2)
+
 pt.show()
