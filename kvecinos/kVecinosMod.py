@@ -17,14 +17,13 @@ def puntosCirculo( centro, npuntos, r, etiqueta):
 	
 	return( puntos )
 
-npuntos=10
+npuntos=200
 
 centro=	np.array( [[1,1], [-1,1], [1,-1], [-1,-1]] )
 puntos1=pd.DataFrame( puntosCirculo(centro[0], npuntos, 2, 1))
 puntos2=pd.DataFrame(puntosCirculo(centro[1], npuntos, 2, 2))
 puntos3=pd.DataFrame(puntosCirculo(centro[2], npuntos, 2, 3))
 puntos4=pd.DataFrame(puntosCirculo(centro[3], npuntos, 2, 4))
-
 
 data=puntos1
 data=data.append(puntos2)
@@ -63,7 +62,7 @@ ordenDistancias=[x for (y,x) in sorted(zip(distancias ,data.index))]
 kVecinos=ordenDistancias[:k]
 diccionario={}
 for i in range(k):
-	print(i)
+	#print(i)
 	x=data['X1'][ kVecinos[i]]
 	y=data['Y1'][ kVecinos[i]]
 	v=data['label'][ kVecinos[i]]
@@ -79,7 +78,7 @@ for i in range(k):
 	else:
 		diccionario[v]=1
 
-puntosVecinos=pd.DataFrame( puntosVecinos)
+puntosVecinos=pd.DataFrame(puntosVecinos)
 
 fig = plt.figure()
 ax = fig.add_subplot(111) 
@@ -89,3 +88,5 @@ ax.scatter(puntos3[0], puntos3[1], color='red')
 ax.scatter(puntos4[0], puntos4[1], color='yellow')
 ax.scatter(punto[0], punto[1], color='gray')
 ax.scatter(puntosVecinos[0], puntosVecinos[1], color='black')
+
+plt.show()
