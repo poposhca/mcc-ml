@@ -5,12 +5,12 @@ import tensorflow as tf
 #Funciones
 
 def circUni(x, y):
-    r = x**2 + y**2
+    r = (x**2 + y**2)**0.5
     return r<=1
 
 def generarDatos(num):
     xrange = [-2,2]
-    yrange = [-2,2]
+    #yrange = [-2,2]
     ps = np.asarray([[random.uniform(xrange[0], xrange[1]) for i in range(2)] for j in range(num)])
     zs = []
     for j in range(num):
@@ -20,9 +20,9 @@ def generarDatos(num):
     return [ps, zs]
 
 #Red neuronal
-train = generarDatos(5000)
+train = generarDatos(200)
 test = generarDatos(10)
-capas = 2
+capas = 4
 
 #Placeholder / Input layer
 p = tf.placeholder(tf.float32, [None, 2])
@@ -44,10 +44,11 @@ init = tf.initialize_all_variables()
 sess = tf.Session()
 sess.run(init)
 #entrenamiento
-sess.run(train_step, feed_dict={p:train[0], z:train[1]})
+for i in range(1000):
+    sess.run(train_step, feed_dict={p:train[0], z:train[1]})
+print 'Datos de pruebas:'
 print test[0]
 #pruebas
+print 'Resultados de la red:'
 print(sess.run(vo, feed_dict={p:test[0]}))
-print(sess.run(wh))
-print(sess.run(wo))
 sess.close()
