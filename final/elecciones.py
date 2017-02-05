@@ -1,15 +1,15 @@
 import pandas as pd
 import numpy as np
 
+'''
 datos = pd.read_csv('elecciones/county_facts.csv')
 resultados = pd.read_csv('elecciones/PresidentialResults.csv')
 dict = pd.read_csv('elecciones/county_facts_dictionary.csv')
+'''
+datos = pd.read_csv('elecciones/facts.csv')
+datos.INC110213 = datos['INC110213']/1000
+datos.MAN450207 = datos['MAN450207']/100000
+datos.WTN220207 = datos['WTN220207']/100000
+datos.RTN131207 = datos['RTN131207']/100000
 
-condados = datos[datos.fips % 1000 != 0]
-newdf = pd.DataFrame()
-for i in range(10):
-    condado = condados[condados.fips == resultados.fips[i]]
-    newCol = pd.DataFrame({'dif':[resultados.dif[i]]})
-    row = condado.join(newCol)
-    newdf = newdf.append(row)
-newdf.to_csv('elecciones/test.csv')
+datos.to_csv('elecciones/divididos.csv')
